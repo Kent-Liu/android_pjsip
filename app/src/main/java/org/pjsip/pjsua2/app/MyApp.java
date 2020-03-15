@@ -59,7 +59,7 @@ class MyCall extends Call {
 			return;
 		}
 	}
-	
+
 	@Override
 	public void onCallMediaState(OnCallMediaStateParam prm) {
 		CallInfo ci;
@@ -68,19 +68,19 @@ class MyCall extends Call {
 		} catch (Exception e) {
 			return;
 		}
-		
+
 		CallMediaInfoVector cmiv = ci.getMedia();
-		
+
 		for (int i = 0; i < cmiv.size(); i++) {
 			CallMediaInfo cmi = cmiv.get(i);
 			if (cmi.getType() == pjmedia_type.PJMEDIA_TYPE_AUDIO &&
-			    (cmi.getStatus() == pjsua_call_media_status.PJSUA_CALL_MEDIA_ACTIVE ||
-			     cmi.getStatus() == pjsua_call_media_status.PJSUA_CALL_MEDIA_REMOTE_HOLD))
+					(cmi.getStatus() == pjsua_call_media_status.PJSUA_CALL_MEDIA_ACTIVE ||
+							cmi.getStatus() == pjsua_call_media_status.PJSUA_CALL_MEDIA_REMOTE_HOLD))
 			{
-				// unfortunately, on Java too, the returned Media cannot be downcasted to AudioMedia 
+				// unfortunately, on Java too, the returned Media cannot be downcasted to AudioMedia
 				Media m = getMedia(i);
 				AudioMedia am = AudioMedia.typecastFromMedia(m);
-				
+
 				// connect ports
 				try {
 					MyApp.ep.audDevManager().getCaptureDevMedia().startTransmit(am);
@@ -97,12 +97,12 @@ class MyCall extends Call {
 class MyAccount extends Account {
 	public ArrayList<MyBuddy> buddyList = new ArrayList<MyBuddy>();
 	public AccountConfig cfg;
-	
+
 	MyAccount(AccountConfig config) {
 		super();
 		cfg = config;
 	}
-	
+
 	public MyBuddy addBuddy(BuddyConfig bud_cfg)
 	{
 		/* Create Buddy */
@@ -113,7 +113,7 @@ class MyAccount extends Account {
 			bud.delete();
 			bud = null;
 		}
-		
+
 		if (bud != null) {
 			buddyList.add(bud);
 			if (bud_cfg.getSubscribe())
@@ -121,21 +121,21 @@ class MyAccount extends Account {
 					bud.subscribePresence(true);
 				} catch (Exception e) {}
 		}
-		
+
 		return bud;
 	}
-	
+
 	public void delBuddy(MyBuddy buddy) {
 		buddyList.remove(buddy);
 		buddy.delete();
 	}
-	
+
 	public void delBuddy(int index) {
 		MyBuddy bud = buddyList.get(index);
 		buddyList.remove(index);
 		bud.delete();
 	}
-	
+
 	@Override
 	public void onRegState(OnRegStateParam prm) {
 		Log.e("tag","onRegState  start");
@@ -148,7 +148,7 @@ class MyAccount extends Account {
 		MyCall call = new MyCall(this, prm.getCallId());
 		MyApp.observer.notifyIncomingCall(call);
 	}
-	
+
 	@Override
 	public void onInstantMessage(OnInstantMessageParam prm) {
 		System.out.println("======== Incoming pager ======== ");
@@ -163,21 +163,21 @@ class MyAccount extends Account {
 
 class MyBuddy extends Buddy {
 	public BuddyConfig cfg;
-	
+
 	MyBuddy(BuddyConfig config) {
 		super();
 		cfg = config;
 	}
-	
+
 	String getStatusText() {
 		BuddyInfo bi;
-		
+
 		try {
 			bi = getInfo();
 		} catch (Exception e) {
 			return "?";
 		}
-		
+
 		String status = "";
 		if (bi.getSubState() == pjsip_evsub_state.PJSIP_EVSUB_STATE_ACTIVE) {
 			if (bi.getPresStatus().getStatus() == pjsua_buddy_status.PJSUA_BUDDY_STATUS_ONLINE) {
@@ -198,14 +198,14 @@ class MyBuddy extends Buddy {
 	public void onBuddyState() {
 		MyApp.observer.notifyBuddyState(this);
 	}
-	
+
 }
 
 
 class MyAccountConfig {
 	public AccountConfig accCfg = new AccountConfig();
 	public ArrayList<BuddyConfig> buddyCfgs = new ArrayList<BuddyConfig>();
-	
+
 	public void readObject(ContainerNode node) {
 		try {
 			ContainerNode acc_node = node.readContainer("Account");
@@ -213,13 +213,13 @@ class MyAccountConfig {
 			ContainerNode buddies_node = acc_node.readArray("buddies");
 			buddyCfgs.clear();
 			while (buddies_node.hasUnread()) {
-				BuddyConfig bud_cfg = new BuddyConfig(); 
+				BuddyConfig bud_cfg = new BuddyConfig();
 				bud_cfg.readObject(buddies_node);
 				buddyCfgs.add(bud_cfg);
 			}
 		} catch (Exception e) {}
 	}
-	
+
 	public void writeObject(ContainerNode node) {
 		try {
 			ContainerNode acc_node = node.writeNewContainer("Account");
@@ -238,7 +238,7 @@ class MyApp {
 		System.loadLibrary("pjsua2");
 		System.out.println("pjsip============================> Library loaded");
 	}
-	
+
 	public static Endpoint ep = new Endpoint();
 	public static MyAppObserver observer;
 	public ArrayList<MyAccount> accList = new ArrayList<MyAccount>();
@@ -247,30 +247,30 @@ class MyApp {
 	private EpConfig epConfig = new EpConfig();
 	private TransportConfig sipTpConfig = new TransportConfig();
 	private String appDir;
-	
+
 	/* Maintain reference to log writer to avoid premature cleanup by GC */
 	private MyLogWriter logWriter;
 
 	private final String configName = "pjsua2.json";
 	private final int SIP_PORT  = 6000;
 	private final int LOG_LEVEL = 4;
-	
+
 	public void init(MyAppObserver obs, String app_dir) {
 		init(obs, app_dir, false);
 	}
-	
+
 	public void init(MyAppObserver obs, String app_dir, boolean own_worker_thread) {
 		observer = obs;
 		appDir = app_dir;
-		
+
 		/* Create endpoint */
 		try {
 			ep.libCreate();
 		} catch (Exception e) {
 			return;
 		}
-			
-		
+
+
 		/* Load config */
 		String configPath = appDir + "/" + configName;
 		File f = new File(configPath);
@@ -280,19 +280,19 @@ class MyApp {
 			/* Set 'default' values */
 			sipTpConfig.setPort(SIP_PORT);
 		}
-		
+
 		/* Override log level setting */
 		epConfig.getLogConfig().setLevel(LOG_LEVEL);
 		epConfig.getLogConfig().setConsoleLevel(LOG_LEVEL);
-		
+
 		/* Set log config. */
 		LogConfig log_cfg = epConfig.getLogConfig();
 		logWriter = new MyLogWriter();
 		log_cfg.setWriter(logWriter);
-		log_cfg.setDecor(log_cfg.getDecor() & 
-						 ~(pj_log_decoration.PJ_LOG_HAS_CR.swigValue() | 
-						   pj_log_decoration.PJ_LOG_HAS_NEWLINE.swigValue()));
-		
+		log_cfg.setDecor(log_cfg.getDecor() &
+				~(pj_log_decoration.PJ_LOG_HAS_CR.swigValue() |
+						pj_log_decoration.PJ_LOG_HAS_NEWLINE.swigValue()));
+
 		/* Set ua config. */
 		UaConfig ua_cfg = epConfig.getUaConfig();
 		ua_cfg.setUserAgent("Pjsua2 Android " + ep.libVersion().getFull());
@@ -303,14 +303,14 @@ class MyApp {
 			ua_cfg.setThreadCnt(0);
 			ua_cfg.setMainThreadOnly(true);
 		}
-		
+
 		/* Init endpoint */
 		try {
 			ep.libInit(epConfig);
 		} catch (Exception e) {
 			return;
 		}
-		
+
 		/* Create transports. */
 		try {
 			ep.transportCreate(pjsip_transport_type_e.PJSIP_TRANSPORT_UDP, sipTpConfig);
@@ -323,14 +323,14 @@ class MyApp {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-		
+
 		/* Create accounts. */
 		for (int i = 0; i < accCfgs.size(); i++) {
 			MyAccountConfig my_cfg = accCfgs.get(i);
 			MyAccount acc = addAcc(my_cfg.accCfg);
 			if (acc == null)
 				continue;
-			
+
 			/* Add Buddies */
 			for (int j = 0; j < my_cfg.buddyCfgs.size(); j++) {
 				BuddyConfig bud_cfg = my_cfg.buddyCfgs.get(j);
@@ -345,7 +345,7 @@ class MyApp {
 			return;
 		}
 	}
-	
+
 	public MyAccount addAcc(AccountConfig cfg) {
 		MyAccount acc = new MyAccount(cfg);
 		try {
@@ -354,30 +354,30 @@ class MyApp {
 			acc = null;
 			return null;
 		}
-		
+
 		accList.add(acc);
 		return acc;
 	}
-	
+
 	public void delAcc(MyAccount acc) {
 		accList.remove(acc);
 	}
-	
+
 	private void loadConfig(String filename) {
 		JsonDocument json = new JsonDocument();
-		
+
 		try {
 			/* Load file */
 			json.loadFile(filename);
 			ContainerNode root = json.getRootContainer();
-			
+
 			/* Read endpoint config */
 			epConfig.readObject(root);
-			
+
 			/* Read transport config */
 			ContainerNode tp_node = root.readContainer("SipTransport");
 			sipTpConfig.readObject(tp_node);
-			
+
 			/* Read account configs */
 			accCfgs.clear();
 			ContainerNode accs_node = root.readArray("accounts");
@@ -389,7 +389,7 @@ class MyApp {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-		
+
 		/* Force delete json now, as I found that Java somehow destroys it
 		 * after lib has been destroyed and from non-registered thread.
 		 */
@@ -403,35 +403,35 @@ class MyApp {
 			MyAccount acc = accList.get(i);
 			MyAccountConfig my_acc_cfg = new MyAccountConfig();
 			my_acc_cfg.accCfg = acc.cfg;
-			
+
 			my_acc_cfg.buddyCfgs.clear();
 			for (int j = 0; j < acc.buddyList.size(); j++) {
 				MyBuddy bud = acc.buddyList.get(j);
 				my_acc_cfg.buddyCfgs.add(bud.cfg);
 			}
-			
+
 			accCfgs.add(my_acc_cfg);
 		}
 	}
-	
+
 	private void saveConfig(String filename) {
 		JsonDocument json = new JsonDocument();
-		
+
 		try {
 			/* Write endpoint config */
 			json.writeObject(epConfig);
-			
+
 			/* Write transport config */
 			ContainerNode tp_node = json.writeNewContainer("SipTransport");
 			sipTpConfig.writeObject(tp_node);
-			
+
 			/* Write account configs */
 			buildAccConfigs();
 			ContainerNode accs_node = json.writeNewArray("accounts");
 			for (int i = 0; i < accCfgs.size(); i++) {
 				accCfgs.get(i).writeObject(accs_node);
 			}
-			
+
 			/* Save file */
 			json.saveFile(filename);
 		} catch (Exception e) {}
@@ -441,27 +441,27 @@ class MyApp {
 		 */
 		json.delete();
 	}
-	
+
 	public void deinit() {
 		String configPath = appDir + "/" + configName;
 		saveConfig(configPath);
-		
+
 		/* Try force GC to avoid late destroy of PJ objects as they should be
 		 * deleted before lib is destroyed.
 		 */
 		Runtime.getRuntime().gc();
-		
+
 		/* Shutdown pjsua. Note that Endpoint destructor will also invoke
 		 * libDestroy(), so this will be a test of double libDestroy().
 		 */
 		try {
 			ep.libDestroy();
 		} catch (Exception e) {}
-		
+
 		/* Force delete Endpoint here, to avoid deletion from a non-
-		 * registered thread (by GC?). 
+		 * registered thread (by GC?).
 		 */
 		ep.delete();
 		ep = null;
-	} 
+	}
 }

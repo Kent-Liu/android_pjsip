@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/00_tmp-android_pjsip.iml" filepath="$PROJECT_DIR$/00_tmp-android_pjsip.iml" group="android_pjsip" />
       <module fileurl="file://$PROJECT_DIR$/android_pjsip.iml" filepath="$PROJECT_DIR$/android_pjsip.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="android_pjsip/app" />
     </modules>
   </component>
 </project>

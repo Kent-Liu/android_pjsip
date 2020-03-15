@@ -1,0 +1,4 @@
+#Sun Mar 15 12:14:34 CST 2020
+base.0=/Users/chir0615/00_tmp/android_pjsip/app/build/intermediates/dex/debug/mergeProjectDexDebug/out/classes.dex
+path.0=classes.dex
+renamed.0=classes.dex

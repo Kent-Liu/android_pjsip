@@ -1,0 +1,88 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="org.pjsip.pjsua2.app"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="22"
+8-->/Users/chir0615/00_tmp/android_pjsip/app/src/main/AndroidManifest.xml
+9        android:targetSdkVersion="29" />
+9-->/Users/chir0615/00_tmp/android_pjsip/app/src/main/AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.INTERNET" />
+11-->/Users/chir0615/00_tmp/android_pjsip/app/src/main/AndroidManifest.xml:7:5-67
+11-->/Users/chir0615/00_tmp/android_pjsip/app/src/main/AndroidManifest.xml:7:22-64
+12    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+12-->/Users/chir0615/00_tmp/android_pjsip/app/src/main/AndroidManifest.xml:8:5-71
+12-->/Users/chir0615/00_tmp/android_pjsip/app/src/main/AndroidManifest.xml:8:22-68
+13    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+13-->/Users/chir0615/00_tmp/android_pjsip/app/src/main/AndroidManifest.xml:9:5-80
+13-->/Users/chir0615/00_tmp/android_pjsip/app/src/main/AndroidManifest.xml:9:22-77
+14    <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
+14-->/Users/chir0615/00_tmp/android_pjsip/app/src/main/AndroidManifest.xml:10:5-81
+14-->/Users/chir0615/00_tmp/android_pjsip/app/src/main/AndroidManifest.xml:10:22-78
+15    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+15-->/Users/chir0615/00_tmp/android_pjsip/app/src/main/AndroidManifest.xml:11:5-73
+15-->/Users/chir0615/00_tmp/android_pjsip/app/src/main/AndroidManifest.xml:11:22-70
+16    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+16-->/Users/chir0615/00_tmp/android_pjsip/app/src/main/AndroidManifest.xml:12:5-75
+16-->/Users/chir0615/00_tmp/android_pjsip/app/src/main/AndroidManifest.xml:12:22-72
+17    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+17-->/Users/chir0615/00_tmp/android_pjsip/app/src/main/AndroidManifest.xml:13:5-76
+17-->/Users/chir0615/00_tmp/android_pjsip/app/src/main/AndroidManifest.xml:13:22-73
+18    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+18-->/Users/chir0615/00_tmp/android_pjsip/app/src/main/AndroidManifest.xml:14:5-79
+18-->/Users/chir0615/00_tmp/android_pjsip/app/src/main/AndroidManifest.xml:14:22-76
+19    <uses-permission android:name="android.permission.WAKE_LOCK" />
+19-->/Users/chir0615/00_tmp/android_pjsip/app/src/main/AndroidManifest.xml:15:5-68
+19-->/Users/chir0615/00_tmp/android_pjsip/app/src/main/AndroidManifest.xml:15:22-65
+20    <uses-permission android:name="android.permission.VIBRATE" />
+20-->/Users/chir0615/00_tmp/android_pjsip/app/src/main/AndroidManifest.xml:16:5-66
+20-->/Users/chir0615/00_tmp/android_pjsip/app/src/main/AndroidManifest.xml:16:22-63
+21    <uses-permission android:name="android.permission.READ_LOGS" />
+21-->/Users/chir0615/00_tmp/android_pjsip/app/src/main/AndroidManifest.xml:17:5-68
+21-->/Users/chir0615/00_tmp/android_pjsip/app/src/main/AndroidManifest.xml:17:22-65
+22    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+22-->/Users/chir0615/00_tmp/android_pjsip/app/src/main/AndroidManifest.xml:18:5-81
+22-->/Users/chir0615/00_tmp/android_pjsip/app/src/main/AndroidManifest.xml:18:22-78
+23
+24    <application
+24-->/Users/chir0615/00_tmp/android_pjsip/app/src/main/AndroidManifest.xml:20:5-38:19
+25        android:allowBackup="true"
+25-->/Users/chir0615/00_tmp/android_pjsip/app/src/main/AndroidManifest.xml:21:9-35
+26        android:debuggable="true"
+27        android:icon="@drawable/ic_launcher"
+27-->/Users/chir0615/00_tmp/android_pjsip/app/src/main/AndroidManifest.xml:22:9-45
+28        android:label="@string/app_name"
+28-->/Users/chir0615/00_tmp/android_pjsip/app/src/main/AndroidManifest.xml:23:9-41
+29        android:testOnly="true"
+30        android:theme="@style/AppTheme" >
+30-->/Users/chir0615/00_tmp/android_pjsip/app/src/main/AndroidManifest.xml:24:9-40
+31        <activity
+31-->/Users/chir0615/00_tmp/android_pjsip/app/src/main/AndroidManifest.xml:25:9-33:20
+32            android:name="org.pjsip.pjsua2.app.MainActivity"
+32-->/Users/chir0615/00_tmp/android_pjsip/app/src/main/AndroidManifest.xml:26:13-61
+33            android:label="@string/app_name" >
+33-->/Users/chir0615/00_tmp/android_pjsip/app/src/main/AndroidManifest.xml:27:13-45
+34            <intent-filter>
+34-->/Users/chir0615/00_tmp/android_pjsip/app/src/main/AndroidManifest.xml:28:13-32:29
+35                <action android:name="android.intent.action.MAIN" />
+35-->/Users/chir0615/00_tmp/android_pjsip/app/src/main/AndroidManifest.xml:29:17-69
+35-->/Users/chir0615/00_tmp/android_pjsip/app/src/main/AndroidManifest.xml:29:25-66
+36
+37                <category android:name="android.intent.category.LAUNCHER" />
+37-->/Users/chir0615/00_tmp/android_pjsip/app/src/main/AndroidManifest.xml:31:17-77
+37-->/Users/chir0615/00_tmp/android_pjsip/app/src/main/AndroidManifest.xml:31:27-74
+38            </intent-filter>
+39        </activity>
+40        <activity
+40-->/Users/chir0615/00_tmp/android_pjsip/app/src/main/AndroidManifest.xml:34:9-37:20
+41            android:name="org.pjsip.pjsua2.app.CallActivity"
+41-->/Users/chir0615/00_tmp/android_pjsip/app/src/main/AndroidManifest.xml:35:13-61
+42            android:label="@string/title_activity_call" >
+42-->/Users/chir0615/00_tmp/android_pjsip/app/src/main/AndroidManifest.xml:36:13-56
+43        </activity>
+44    </application>
+45
+46</manifest>
